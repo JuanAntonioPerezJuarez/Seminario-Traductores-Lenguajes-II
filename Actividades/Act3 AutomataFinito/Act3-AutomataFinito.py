@@ -33,12 +33,12 @@ class ScaleValidator:
             # i, ii°, III, iv, v, VI, VII
             chord_types = ['m', 'm', '', 'm', 'm', '', '']
             
-        # Agregar acordes básicos
         for i, note in enumerate(scale_notes):
-            chord = note + chord_types[i]
+            chord = note + chord_types[i]  # Esto genera el acorde
             valid_chords.add(chord)
-            # Agregar séptimas
-            valid_chords.add(chord + '7')
+            # Agregar séptima si el acorde es menor o mayor
+            valid_chords.add(note + chord_types[i] + '7')
+
             
         return valid_chords
     
