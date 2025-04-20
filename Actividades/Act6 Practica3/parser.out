@@ -1,0 +1,462 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> declaracion
+Rule 2     programa -> asignacion
+Rule 3     programa -> expresion
+Rule 4     declaracion -> INT ID PUNTOCOMA
+Rule 5     declaracion -> FLOAT ID PUNTOCOMA
+Rule 6     asignacion -> ID IGUAL expresion PUNTOCOMA
+Rule 7     expresion -> expresion SUMA expresion
+Rule 8     expresion -> expresion RESTA expresion
+Rule 9     expresion -> expresion MULT expresion
+Rule 10    expresion -> expresion DIV expresion
+Rule 11    expresion -> LPAREN expresion RPAREN
+Rule 12    expresion -> NUMERO
+Rule 13    expresion -> ID
+
+Terminals, with rules where they appear
+
+DIV                  : 10
+FLOAT                : 5
+ID                   : 4 5 6 13
+IGUAL                : 6
+INT                  : 4
+LPAREN               : 11
+MULT                 : 9
+NUMERO               : 12
+PUNTOCOMA            : 4 5 6
+RESTA                : 8
+RPAREN               : 11
+SUMA                 : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 2
+declaracion          : 1
+expresion            : 3 6 7 7 8 8 9 9 10 10 11
+programa             : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . declaracion
+    (2) programa -> . asignacion
+    (3) programa -> . expresion
+    (4) declaracion -> . INT ID PUNTOCOMA
+    (5) declaracion -> . FLOAT ID PUNTOCOMA
+    (6) asignacion -> . ID IGUAL expresion PUNTOCOMA
+    (7) expresion -> . expresion SUMA expresion
+    (8) expresion -> . expresion RESTA expresion
+    (9) expresion -> . expresion MULT expresion
+    (10) expresion -> . expresion DIV expresion
+    (11) expresion -> . LPAREN expresion RPAREN
+    (12) expresion -> . NUMERO
+    (13) expresion -> . ID
+
+    INT             shift and go to state 5
+    FLOAT           shift and go to state 7
+    ID              shift and go to state 6
+    LPAREN          shift and go to state 8
+    NUMERO          shift and go to state 9
+
+    programa                       shift and go to state 1
+    declaracion                    shift and go to state 2
+    asignacion                     shift and go to state 3
+    expresion                      shift and go to state 4
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> declaracion .
+
+    $end            reduce using rule 1 (programa -> declaracion .)
+
+
+state 3
+
+    (2) programa -> asignacion .
+
+    $end            reduce using rule 2 (programa -> asignacion .)
+
+
+state 4
+
+    (3) programa -> expresion .
+    (7) expresion -> expresion . SUMA expresion
+    (8) expresion -> expresion . RESTA expresion
+    (9) expresion -> expresion . MULT expresion
+    (10) expresion -> expresion . DIV expresion
+
+    $end            reduce using rule 3 (programa -> expresion .)
+    SUMA            shift and go to state 10
+    RESTA           shift and go to state 11
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+
+state 5
+
+    (4) declaracion -> INT . ID PUNTOCOMA
+
+    ID              shift and go to state 14
+
+
+state 6
+
+    (6) asignacion -> ID . IGUAL expresion PUNTOCOMA
+    (13) expresion -> ID .
+
+    IGUAL           shift and go to state 15
+    SUMA            reduce using rule 13 (expresion -> ID .)
+    RESTA           reduce using rule 13 (expresion -> ID .)
+    MULT            reduce using rule 13 (expresion -> ID .)
+    DIV             reduce using rule 13 (expresion -> ID .)
+    $end            reduce using rule 13 (expresion -> ID .)
+
+
+state 7
+
+    (5) declaracion -> FLOAT . ID PUNTOCOMA
+
+    ID              shift and go to state 16
+
+
+state 8
+
+    (11) expresion -> LPAREN . expresion RPAREN
+    (7) expresion -> . expresion SUMA expresion
+    (8) expresion -> . expresion RESTA expresion
+    (9) expresion -> . expresion MULT expresion
+    (10) expresion -> . expresion DIV expresion
+    (11) expresion -> . LPAREN expresion RPAREN
+    (12) expresion -> . NUMERO
+    (13) expresion -> . ID
+
+    LPAREN          shift and go to state 8
+    NUMERO          shift and go to state 9
+    ID              shift and go to state 18
+
+    expresion                      shift and go to state 17
+
+state 9
+
+    (12) expresion -> NUMERO .
+
+    SUMA            reduce using rule 12 (expresion -> NUMERO .)
+    RESTA           reduce using rule 12 (expresion -> NUMERO .)
+    MULT            reduce using rule 12 (expresion -> NUMERO .)
+    DIV             reduce using rule 12 (expresion -> NUMERO .)
+    $end            reduce using rule 12 (expresion -> NUMERO .)
+    RPAREN          reduce using rule 12 (expresion -> NUMERO .)
+    PUNTOCOMA       reduce using rule 12 (expresion -> NUMERO .)
+
+
+state 10
+
+    (7) expresion -> expresion SUMA . expresion
+    (7) expresion -> . expresion SUMA expresion
+    (8) expresion -> . expresion RESTA expresion
+    (9) expresion -> . expresion MULT expresion
+    (10) expresion -> . expresion DIV expresion
+    (11) expresion -> . LPAREN expresion RPAREN
+    (12) expresion -> . NUMERO
+    (13) expresion -> . ID
+
+    LPAREN          shift and go to state 8
+    NUMERO          shift and go to state 9
+    ID              shift and go to state 18
+
+    expresion                      shift and go to state 19
+
+state 11
+
+    (8) expresion -> expresion RESTA . expresion
+    (7) expresion -> . expresion SUMA expresion
+    (8) expresion -> . expresion RESTA expresion
+    (9) expresion -> . expresion MULT expresion
+    (10) expresion -> . expresion DIV expresion
+    (11) expresion -> . LPAREN expresion RPAREN
+    (12) expresion -> . NUMERO
+    (13) expresion -> . ID
+
+    LPAREN          shift and go to state 8
+    NUMERO          shift and go to state 9
+    ID              shift and go to state 18
+
+    expresion                      shift and go to state 20
+
+state 12
+
+    (9) expresion -> expresion MULT . expresion
+    (7) expresion -> . expresion SUMA expresion
+    (8) expresion -> . expresion RESTA expresion
+    (9) expresion -> . expresion MULT expresion
+    (10) expresion -> . expresion DIV expresion
+    (11) expresion -> . LPAREN expresion RPAREN
+    (12) expresion -> . NUMERO
+    (13) expresion -> . ID
+
+    LPAREN          shift and go to state 8
+    NUMERO          shift and go to state 9
+    ID              shift and go to state 18
+
+    expresion                      shift and go to state 21
+
+state 13
+
+    (10) expresion -> expresion DIV . expresion
+    (7) expresion -> . expresion SUMA expresion
+    (8) expresion -> . expresion RESTA expresion
+    (9) expresion -> . expresion MULT expresion
+    (10) expresion -> . expresion DIV expresion
+    (11) expresion -> . LPAREN expresion RPAREN
+    (12) expresion -> . NUMERO
+    (13) expresion -> . ID
+
+    LPAREN          shift and go to state 8
+    NUMERO          shift and go to state 9
+    ID              shift and go to state 18
+
+    expresion                      shift and go to state 22
+
+state 14
+
+    (4) declaracion -> INT ID . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 23
+
+
+state 15
+
+    (6) asignacion -> ID IGUAL . expresion PUNTOCOMA
+    (7) expresion -> . expresion SUMA expresion
+    (8) expresion -> . expresion RESTA expresion
+    (9) expresion -> . expresion MULT expresion
+    (10) expresion -> . expresion DIV expresion
+    (11) expresion -> . LPAREN expresion RPAREN
+    (12) expresion -> . NUMERO
+    (13) expresion -> . ID
+
+    LPAREN          shift and go to state 8
+    NUMERO          shift and go to state 9
+    ID              shift and go to state 18
+
+    expresion                      shift and go to state 24
+
+state 16
+
+    (5) declaracion -> FLOAT ID . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 25
+
+
+state 17
+
+    (11) expresion -> LPAREN expresion . RPAREN
+    (7) expresion -> expresion . SUMA expresion
+    (8) expresion -> expresion . RESTA expresion
+    (9) expresion -> expresion . MULT expresion
+    (10) expresion -> expresion . DIV expresion
+
+    RPAREN          shift and go to state 26
+    SUMA            shift and go to state 10
+    RESTA           shift and go to state 11
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+
+state 18
+
+    (13) expresion -> ID .
+
+    RPAREN          reduce using rule 13 (expresion -> ID .)
+    SUMA            reduce using rule 13 (expresion -> ID .)
+    RESTA           reduce using rule 13 (expresion -> ID .)
+    MULT            reduce using rule 13 (expresion -> ID .)
+    DIV             reduce using rule 13 (expresion -> ID .)
+    $end            reduce using rule 13 (expresion -> ID .)
+    PUNTOCOMA       reduce using rule 13 (expresion -> ID .)
+
+
+state 19
+
+    (7) expresion -> expresion SUMA expresion .
+    (7) expresion -> expresion . SUMA expresion
+    (8) expresion -> expresion . RESTA expresion
+    (9) expresion -> expresion . MULT expresion
+    (10) expresion -> expresion . DIV expresion
+
+  ! shift/reduce conflict for SUMA resolved as shift
+  ! shift/reduce conflict for RESTA resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    $end            reduce using rule 7 (expresion -> expresion SUMA expresion .)
+    RPAREN          reduce using rule 7 (expresion -> expresion SUMA expresion .)
+    PUNTOCOMA       reduce using rule 7 (expresion -> expresion SUMA expresion .)
+    SUMA            shift and go to state 10
+    RESTA           shift and go to state 11
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+  ! SUMA            [ reduce using rule 7 (expresion -> expresion SUMA expresion .) ]
+  ! RESTA           [ reduce using rule 7 (expresion -> expresion SUMA expresion .) ]
+  ! MULT            [ reduce using rule 7 (expresion -> expresion SUMA expresion .) ]
+  ! DIV             [ reduce using rule 7 (expresion -> expresion SUMA expresion .) ]
+
+
+state 20
+
+    (8) expresion -> expresion RESTA expresion .
+    (7) expresion -> expresion . SUMA expresion
+    (8) expresion -> expresion . RESTA expresion
+    (9) expresion -> expresion . MULT expresion
+    (10) expresion -> expresion . DIV expresion
+
+  ! shift/reduce conflict for SUMA resolved as shift
+  ! shift/reduce conflict for RESTA resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    $end            reduce using rule 8 (expresion -> expresion RESTA expresion .)
+    RPAREN          reduce using rule 8 (expresion -> expresion RESTA expresion .)
+    PUNTOCOMA       reduce using rule 8 (expresion -> expresion RESTA expresion .)
+    SUMA            shift and go to state 10
+    RESTA           shift and go to state 11
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+  ! SUMA            [ reduce using rule 8 (expresion -> expresion RESTA expresion .) ]
+  ! RESTA           [ reduce using rule 8 (expresion -> expresion RESTA expresion .) ]
+  ! MULT            [ reduce using rule 8 (expresion -> expresion RESTA expresion .) ]
+  ! DIV             [ reduce using rule 8 (expresion -> expresion RESTA expresion .) ]
+
+
+state 21
+
+    (9) expresion -> expresion MULT expresion .
+    (7) expresion -> expresion . SUMA expresion
+    (8) expresion -> expresion . RESTA expresion
+    (9) expresion -> expresion . MULT expresion
+    (10) expresion -> expresion . DIV expresion
+
+  ! shift/reduce conflict for SUMA resolved as shift
+  ! shift/reduce conflict for RESTA resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    $end            reduce using rule 9 (expresion -> expresion MULT expresion .)
+    RPAREN          reduce using rule 9 (expresion -> expresion MULT expresion .)
+    PUNTOCOMA       reduce using rule 9 (expresion -> expresion MULT expresion .)
+    SUMA            shift and go to state 10
+    RESTA           shift and go to state 11
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+  ! SUMA            [ reduce using rule 9 (expresion -> expresion MULT expresion .) ]
+  ! RESTA           [ reduce using rule 9 (expresion -> expresion MULT expresion .) ]
+  ! MULT            [ reduce using rule 9 (expresion -> expresion MULT expresion .) ]
+  ! DIV             [ reduce using rule 9 (expresion -> expresion MULT expresion .) ]
+
+
+state 22
+
+    (10) expresion -> expresion DIV expresion .
+    (7) expresion -> expresion . SUMA expresion
+    (8) expresion -> expresion . RESTA expresion
+    (9) expresion -> expresion . MULT expresion
+    (10) expresion -> expresion . DIV expresion
+
+  ! shift/reduce conflict for SUMA resolved as shift
+  ! shift/reduce conflict for RESTA resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    $end            reduce using rule 10 (expresion -> expresion DIV expresion .)
+    RPAREN          reduce using rule 10 (expresion -> expresion DIV expresion .)
+    PUNTOCOMA       reduce using rule 10 (expresion -> expresion DIV expresion .)
+    SUMA            shift and go to state 10
+    RESTA           shift and go to state 11
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+  ! SUMA            [ reduce using rule 10 (expresion -> expresion DIV expresion .) ]
+  ! RESTA           [ reduce using rule 10 (expresion -> expresion DIV expresion .) ]
+  ! MULT            [ reduce using rule 10 (expresion -> expresion DIV expresion .) ]
+  ! DIV             [ reduce using rule 10 (expresion -> expresion DIV expresion .) ]
+
+
+state 23
+
+    (4) declaracion -> INT ID PUNTOCOMA .
+
+    $end            reduce using rule 4 (declaracion -> INT ID PUNTOCOMA .)
+
+
+state 24
+
+    (6) asignacion -> ID IGUAL expresion . PUNTOCOMA
+    (7) expresion -> expresion . SUMA expresion
+    (8) expresion -> expresion . RESTA expresion
+    (9) expresion -> expresion . MULT expresion
+    (10) expresion -> expresion . DIV expresion
+
+    PUNTOCOMA       shift and go to state 27
+    SUMA            shift and go to state 10
+    RESTA           shift and go to state 11
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+
+state 25
+
+    (5) declaracion -> FLOAT ID PUNTOCOMA .
+
+    $end            reduce using rule 5 (declaracion -> FLOAT ID PUNTOCOMA .)
+
+
+state 26
+
+    (11) expresion -> LPAREN expresion RPAREN .
+
+    SUMA            reduce using rule 11 (expresion -> LPAREN expresion RPAREN .)
+    RESTA           reduce using rule 11 (expresion -> LPAREN expresion RPAREN .)
+    MULT            reduce using rule 11 (expresion -> LPAREN expresion RPAREN .)
+    DIV             reduce using rule 11 (expresion -> LPAREN expresion RPAREN .)
+    $end            reduce using rule 11 (expresion -> LPAREN expresion RPAREN .)
+    RPAREN          reduce using rule 11 (expresion -> LPAREN expresion RPAREN .)
+    PUNTOCOMA       reduce using rule 11 (expresion -> LPAREN expresion RPAREN .)
+
+
+state 27
+
+    (6) asignacion -> ID IGUAL expresion PUNTOCOMA .
+
+    $end            reduce using rule 6 (asignacion -> ID IGUAL expresion PUNTOCOMA .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SUMA in state 19 resolved as shift
+WARNING: shift/reduce conflict for RESTA in state 19 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 19 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 19 resolved as shift
+WARNING: shift/reduce conflict for SUMA in state 20 resolved as shift
+WARNING: shift/reduce conflict for RESTA in state 20 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 20 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 20 resolved as shift
+WARNING: shift/reduce conflict for SUMA in state 21 resolved as shift
+WARNING: shift/reduce conflict for RESTA in state 21 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 21 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 21 resolved as shift
+WARNING: shift/reduce conflict for SUMA in state 22 resolved as shift
+WARNING: shift/reduce conflict for RESTA in state 22 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 22 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 22 resolved as shift
